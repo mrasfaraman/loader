@@ -74,15 +74,10 @@ const Notification = ({navigation}) => {
           placeholderTextColor={theme.text}
         />
       </View>
-      <View style={{marginTop:20}}>
-      <Text style={[styles.notificationPara, {color: theme.text, textAlign:'center'}]}>
-          No new notifications
-          </Text>
-      </View>
-      {/* <FlatList
+      <FlatList
         data={data}
         renderItem={item => <NotificationCard></NotificationCard>}
-      /> */}
+      />
     </ScrollView>
   );
 };

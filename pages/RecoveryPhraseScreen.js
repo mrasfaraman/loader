@@ -86,6 +86,15 @@ const MnemonicComponent = ({ mnemonic, theme }) => {
 };
 
 const Networks = [
+  {
+    networkName: "BSC Chain",
+    nodeURL: "https://bsc.publicnode.com",
+    logo:"https://imgs.search.brave.com/enbbKzAZdRat161YMrvc_Df9R1D09Lp4dJO11vZE0vc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXNl/YXJjaC5iaW5hbmNl/LmNvbS9zdGF0aWMv/aW1hZ2VzL3Byb2pl/Y3RzL2JuYi9sb2dv/Mi5wbmc",
+    symbol: "BNB",
+    networkId:56,
+    explorerURL: "https://bscscan.com/tx/",
+    type : "evm",
+ },
 {
   networkName: "Ethereum",
   nodeURL: "https://eth.drpc.org",
@@ -95,15 +104,7 @@ const Networks = [
   explorerURL: "https://etherscan.io/tx/",
   type : "evm"
 },
-{
-   networkName: "BSC Chain",
-   nodeURL: "https://bsc.publicnode.com",
-   logo:"https://imgs.search.brave.com/enbbKzAZdRat161YMrvc_Df9R1D09Lp4dJO11vZE0vc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXNl/YXJjaC5iaW5hbmNl/LmNvbS9zdGF0aWMv/aW1hZ2VzL3Byb2pl/Y3RzL2JuYi9sb2dv/Mi5wbmc",
-   symbol: "BNB",
-   networkId:56,
-   explorerURL: "https://bscscan.com/tx/",
-   type : "evm",
-},
+
 // {
 //   networkName : "Fantom",
 //   nodeURL : "https://rpc.ftm.tools/",
@@ -142,7 +143,7 @@ const Networks = [
 },
 {
   networkName: "Tron",
-  nodeURL: "",
+  nodeURL: "https://api.trongrid.io",
   logo:"https://imgs.search.brave.com/zM2ZkIGKUPkdb0N_dwMveroOl5JVge8bMZHtAPUgYxc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y29pbnBhcGVyLmNv/bS9jb2lucGFwZXIv/Zl93ZWJwLGNfbGlt/aXQsd18zODQwLHFf/YXV0bzpnb29kL3Ry/b25fdHJ4X2xvZ29f/N2VlMzk0ZDU4Yi5w/bmc",
   symbol: "TRX",
   networkId:6,

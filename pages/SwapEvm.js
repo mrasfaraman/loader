@@ -849,8 +849,8 @@ const EVM_Tokens = [
       return (
           <ScrollView style={[styles.mainWrapper, { backgroundColor: theme.screenBackgroud }]}>
               <Header title={t('swap')} onBack={() => navigation.goBack()} />
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 , marginBottom:15 }}>
-                  <Text style={{ color: theme.text, fontSize: 30, }}>{activeNet?.type.toUpperCase()} {t('swap')}</Text>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 40 , marginBottom:20 }}>
+                  <Text style={{ color: theme.text, fontSize: 30 }}>{activeNet?.type.toUpperCase()} {t('swap')}</Text>
               </View>
               {loading ? <MaroonSpinner/> :
               <View>
@@ -865,7 +865,7 @@ const EVM_Tokens = [
                   </View>
               </View>
               <SwapCard2 />
-              <View style={[styles.gasFlexWrapper,{ marginTop: 30 , marginBottom:30}]}>
+              <View style={[styles.gasFlexWrapper,{ marginTop: 80 , marginBottom:50}]}>
                   <View style={styles.gasFeeFlex}>
                       <Text style={[styles.gasFeeLabel, {color: theme.text }]}>Balance</Text>
                       <Text style={[styles.gasFee, {color: theme.emphasis}]}>{ballance} {topToken?.symbol}</Text>
@@ -1013,7 +1013,7 @@ const EVM_Tokens = [
           // backgroundColor: "#362538"
       },
       swapWrapper: {
-          marginTop: 10
+          marginTop: 20
       },
       swapHeaderFlex: {
           flexDirection: "row",

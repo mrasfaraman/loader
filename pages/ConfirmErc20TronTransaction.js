@@ -14,19 +14,24 @@ import SwapDrop from '../assets/images/swap_drop.png';
 import SwapConfirmTransfer from '../assets/images/swap_confirm_transfer.png';
 import SwapConfirmTransferDark from '../assets/images/swap_confirm_transfer_dark.png';
 import {ThemeContext} from '../context/ThemeContext';
-import { sendtronNative , Bitcoin_estimatedGas } from '../utils/function';
+import { sendEvmToken , Evm_estimatedGas_Evm , gettronBalance, getSolBalance, getEVMBalance , sendTronToken } from '../utils/function';
 import MaroonSpinner from '../components/Loader/MaroonSpinner';
 import { useAuth } from '../context/AuthContext';
 
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+import {useTranslation} from 'react-i18next';
+import i18n from './i18n';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const ConfirmTronTransaction = ({route, navigation}) => {
+const ConfirmErc20TronTransaction = ({route, navigation}) => {
   const {theme} = useContext(ThemeContext);
   const [loader , setLoader] = useState(true)
   const [trxDetail , setTrxDetail] = useState({})
   const [gasDetail , setGasDetail] = useState()
-
+  const [ballance, setBalance] = useState(0);
+  const [activeNet, setActiveNet] = useState()
+  const [address, setAddress] = useState();
   const {
     wc,
     wallet,
@@ -41,13 +46,64 @@ const ConfirmTronTransaction = ({route, navigation}) => {
     selectedNetwork
   } = useAuth();
 
+  const getNetworkactive = async () => {
+    let data = await JSON.parse(selectedNetwork)
+    setActiveNet(data)
+  }
+  const {t} = useTranslation();
+  useEffect(() => {
+    const loadSelectedLanguage = async () => {
+      try {
+        const selectedLanguage = await AsyncStorage.getItem('selectedLanguage');
+        if (selectedLanguage) {
+          i18n.changeLanguage(selectedLanguage); 
+        }
+      } catch (error) {
+        console.error('Error loading selected language:', error);
+      }
+    };
+    loadSelectedLanguage();
+  }, []);
+  useEffect(() => {
+    getNetworkactive()
+  }, [selectedNetwork, Networks])
 
+  const getbls = async () => {
+    if (activeNet?.type === "evm") {
+      let data = await getEVMBalance(address.replace(/^"|"$/g, ''), activeNet?.nodeURL)
+      setBalance(data?.balance)
+    }else if (activeNet?.type === "tron") {
+      let data = await gettronBalance(address.replace(/^"|"$/g, ''))
+      console.log(gettronBalance)
+      setBalance(data?.balance)
+    }  else {
+      let data = await getSolBalance(address.replace(/^"|"$/g, ''))
+      setBalance(data?.balance)
+    }
+  }
+  useEffect(() => {
+    getbls()
+    const intervalId = setInterval(getbls, 10000);
+    return () => clearInterval(intervalId);
+  }, [Networks, address , selectedNetwork ,activeNet])
+    
+  useEffect(()=>{
+      getbls()
+    },[selectedAccount])
+
+
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setAddress(JSON.stringify(activeNet?.type === 'solana' ? selectedAccount.solana.publicKey : activeNet?.type === 'tron' ? selectedAccount.tron.address : selectedAccount.evm.address));
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }, [Networks, selectedAccount]);
 
   const confirmAndSend = async () => {
     try {
       setLoader(true)
-      let response = await sendtronNative(trxDetail?.privateKey, trxDetail?.recipientAddress, trxDetail?.amount == 0.0003 ? 0.00031 :trxDetail?.amount );
-      console.log('Sending tron...', response);
+      let response = await sendTronToken(trxDetail?.privateKey, trxDetail?.tokenAddress, trxDetail?.recipientAddress, trxDetail?.amountWei);
+      console.log('Sending evm...', response);
       if (response.transactionHash) {
         setLoader(false)
         Toast.show({
@@ -77,9 +133,8 @@ const ConfirmTronTransaction = ({route, navigation}) => {
   const getEstimatedGas = async (data) => {
     try{
       setLoader(true)
-      // let gasData = await Bitcoin_estimatedGas(data.privateKey , data.recipientAddress , data.amount == 0.0003 ? 0.00031 : data.amount )
-      // console.log(gasData.result)
-      // setGasDetail(gasData.result)
+      let gasData = await Evm_estimatedGas_Evm('0x000000000000000000000000000000000000dEaD' , data?.from , 0 ,data?.chain , data?.tokenAddress)
+      setGasDetail(gasData)
       setLoader(false)
     }catch(error){
       setLoader(false)
@@ -92,10 +147,6 @@ const ConfirmTronTransaction = ({route, navigation}) => {
       setTrxDetail(route?.params?.trxData);
     }
   }, [route?.params?.trxData]);
-
-
-
-
 
   const SwapCard = () => {
     return (
@@ -151,14 +202,15 @@ const ConfirmTronTransaction = ({route, navigation}) => {
       </View>
     );
   };
-  let validity = Number(trxDetail?.amount) + 0.0000001
-  let isvalid = validity >= trxDetail?.balance ?  false : true;
-  console.log(trxDetail?.balance)
+
+  let validity = 0.000001
+  let isvalid = validity >= ballance ?  false : true;
+  
   return (
     <ScrollView
       style={[styles.mainWrapper, {backgroundColor: theme.screenBackgroud}]}>
       <Header
-        title={'Confirm Transaction'}
+        title={t('confirm_transaction')}
         onBack={() => navigation.goBack()}
       />
       {/* <View style={styles.swapWrapper}>
@@ -167,30 +219,31 @@ const ConfirmTronTransaction = ({route, navigation}) => {
       <View style={[styles.confirmAmountWrapperFlex ,{marginTop:50}]}>
         <View style={styles.confrimAmountCenterWrapper}>
           <Text style={[styles.confirmAmountHeding, {color: theme.text}]}>
-          Review Your Transaction
+          {t('review_your_transaction')}
           </Text>
           <View style={styles.confirmAmountFlex}>
             <View>
               {/* <Image source={SwapCurrencyBtcLarge} /> */}
             </View>
             <Text style={[styles.swapConfirmValue, {color: theme.text}]}>
-              {trxDetail?.balance?.toFixed(6)}
+              {/* {Number(trxDetail?.balance).toFixed(4)} */}
+              {trxDetail?.amount} {trxDetail?.tokenSymbol}
             </Text>
             {/* <Text style={[ {color: theme.text}]}>
               {trxDetail?.symbol}
             </Text> */}
           </View>
-          <View style={styles.SwapConfirmTransferFlex}>
+          {/* <View style={styles.SwapConfirmTransferFlex}>
             <Image source={theme.type == 'dark' ? SwapConfirmTransfer : SwapConfirmTransferDark} />
-          </View>
+          </View> */}
           {loader ? "" :
           <View style={styles.confirmAmountFlex}>
             <View>
               {/* <Image source={SwapCurrencyBtcLarge} /> */}
             </View>
-            <Text style={[styles.swapConfirmValue, {color: theme.text}]}>
-            {(trxDetail?.balanceAmount - 0.0000001)?.toFixed(6)}
-            </Text>
+            {/* <Text style={[styles.swapConfirmValue, {color: theme.text}]}>
+            {(trxDetail?.balanceAmount - Number(gasDetail?.gasFeeInEther))?.toFixed(4)}
+            </Text> */}
             {/* <Text style={[ {color: theme.text}]}>
               {trxDetail?.symbol}
             </Text> */}
@@ -203,10 +256,10 @@ const ConfirmTronTransaction = ({route, navigation}) => {
       <View
         style={[styles.gasFeeMainWrapper, {backgroundColor: theme.menuItemBG}]}>
         <View style={styles.gasFeeFlex}>
-          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>Amount To Send</Text>
+          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>{t('amount_to_send')}</Text>
           <View>
             <Text style={[styles.gasFeeValue, {color: theme.emphasis}]}>
-            { Number(trxDetail?.amount)}
+            {trxDetail?.amount}
             </Text>
             {/* <Text style={[styles.gasFeeMaxVal, {color: theme.text}]}>
             {trxDetail?.amount}
@@ -214,21 +267,22 @@ const ConfirmTronTransaction = ({route, navigation}) => {
           </View>
         </View>
         <View style={styles.gasFeeFlex}>
-          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>Estimated Fee</Text>
+          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>{t('estimated_gas')}</Text>
           <View>
             {/* <Text style={[styles.gasFeeValue, {color: theme.emphasis}]}>
               0.00612061025
             </Text> */}
             <Text style={[styles.gasFeeMaxVal, {color: theme.text}]}>
-             {(0.0000001).toFixed(4)}
+            0.000001
             </Text>
           </View>
         </View>
         <View style={styles.gasFeeFlex}>
-          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>total</Text>
+          <Text style={[styles.gasFeeLabel, {color: theme.text}]}>{t('total')}</Text>
           <View>
             <Text style={[styles.gasFeeValue, {color: theme.emphasis}]}>
-            {Number(trxDetail?.amount) + 0.0000001}
+            {/* {trxDetail?.amount} */}
+            {Number(trxDetail?.amount) + 0.000001}
             </Text>
             {/* <Text style={[styles.gasFeeMaxVal, {color: theme.text}]}>
               0.00612061025
@@ -237,7 +291,8 @@ const ConfirmTronTransaction = ({route, navigation}) => {
         </View>
       </View>
       <View style={styles.tokenImportBtnWrapper}>
-    {isvalid ? 
+
+{isvalid ? 
         <TouchableOpacity
         onPress={()=>confirmAndSend()}
           style={[
@@ -248,14 +303,16 @@ const ConfirmTronTransaction = ({route, navigation}) => {
             },
           ]}>
           <Text style={[styles.tokenImportButtonText, {color: '#fff'}]}>
-            Confirm Transaction
+          {t('confirm_transaction')}
           </Text>
         </TouchableOpacity>
+
         :
         <View style={{ justifyContent: 'center', alignItems: 'center'}}>
         <Text style={[styles.gasFeeValue, {color: theme.emphasis }]}>
-          Insufficient funds for gas
+        {t('insufficient_funds_for_gas')}
         </Text>
+        
         <TouchableOpacity
           style={[
             styles.tokenImportButton,
@@ -267,11 +324,24 @@ const ConfirmTronTransaction = ({route, navigation}) => {
             },
           ]}>
           <Text style={[styles.tokenImportButtonText, {color: '#fff'}]}>
-            Confirm Transaction
+          {t('confirm_transaction')}
           </Text>
         </TouchableOpacity>
         </View>
         }
+            {/* <TouchableOpacity
+        onPress={()=>getEstimatedGas()}
+          style={[
+            styles.tokenImportButton,
+            {
+              backgroundColor: theme.tokenImportBtn,
+              borderColor: theme.tokenImportBtn,
+            },
+          ]}>
+          <Text style={[styles.tokenImportButtonText, {color: '#fff'}]}>
+           getEstimatedGas
+          </Text>
+            </TouchableOpacity> */}
       </View>
       </>
       }
@@ -279,7 +349,7 @@ const ConfirmTronTransaction = ({route, navigation}) => {
   );
 };
 
-export default ConfirmTronTransaction;
+export default ConfirmErc20TronTransaction;
 
 const styles = StyleSheet.create({
   mainWrapper: {

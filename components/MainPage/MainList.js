@@ -18,7 +18,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { useAuth } from '../../context/AuthContext';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { importEVMToken, importSolToken } from '../../utils/function';
+import { importEVMToken, importSolToken , importTronToken} from '../../utils/function';
 import MaroonSpinner from '../Loader/MaroonSpinner';
 import {useTranslation} from 'react-i18next';
 import i18n from "../../pages/i18n";
@@ -64,6 +64,16 @@ const MainList = ({ navigation }) => {
         // } else {
         // }
     }
+    const tokentronUpdate = async (item, index) => {
+      let responce = await importTronToken(address.replace(/^"|"$/g, '') , item.token_address);
+      console.log(">>>>>>>>>>",responce)
+      updateToken(index, responce)
+      // if (!responce) {
+      //   
+      //   updateToken(index, item)
+      // } else {
+      // }
+  }
 
     const tokensolUpdate = async (item, index) => {
 
@@ -91,6 +101,8 @@ const MainList = ({ navigation }) => {
                     }
                 } else if (item?.rpc == activeNet?.nodeURL) {
                     tokenevmUpdate(item, index)
+                }else if (item?.rpc == 'tron') {
+                  tokentronUpdate(item, index)
                 }
             })
         }, 1000);
@@ -119,7 +131,8 @@ const MainList = ({ navigation }) => {
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            setAddress(JSON.stringify(activeNet?.type === 'solana' ? selectedAccount.solana.publicKey : selectedAccount.evm.address));
+          setAddress(JSON.stringify(activeNet?.type === 'solana' ? selectedAccount.solana.publicKey : activeNet?.type === 'btc' ? selectedAccount.btc.address :  activeNet?.type === 'tron' ? selectedAccount.tron.address :  activeNet?.type === 'doge' ? selectedAccount.doge.address : selectedAccount.evm.address));
+            // setAddress(JSON.stringify(activeNet?.type === 'solana' ? selectedAccount.solana.publicKey : selectedAccount.evm.address));
         }, 1000);
         return () => clearTimeout(timeoutId);
     }, [activeNet, selectedAccount]);
@@ -162,7 +175,9 @@ const MainList = ({ navigation }) => {
                     </View>
 
                     <View>
-                        <Text style={[styles.thirdCoinListDollar, { color: theme.text }]}> {Number(item.balance).toFixed(3)}  {item.symbol.toUpperCase()}</Text>
+                        <Text style={[styles.thirdCoinListDollar, { color: theme.text }]}> 
+                        {((Number(item.balance) * (10 ** item.decimals))* (10 ** item.decimals))?.toFixed(4)}  {item.symbol.toUpperCase()}
+                        </Text>
                         <Text style={[styles.thirdCoinListCrypto, { color: theme.text }]}> {item.decimals} {t('decimals')}</Text>
                     </View>
 
@@ -174,7 +189,7 @@ const MainList = ({ navigation }) => {
     return (
       <View style={styles.mainWrapper}>
        
-        {activeNet?.type == 'evm' || activeNet?.type == 'solana' ? (
+        {activeNet?.type == 'evm' || activeNet?.type == 'solana' || activeNet?.type == 'tron' ? (
         <View style={styles.mainListHeader}>
           <TouchableOpacity
             style={[
@@ -210,7 +225,7 @@ const MainList = ({ navigation }) => {
         </View>
         )}
       
-        {activeNet?.type == 'evm' || activeNet?.type == 'solana' ? (
+        {activeNet?.type == 'evm' || activeNet?.type == 'solana' || activeNet?.type == 'tron' ? (
         <>
         {pageSwitch == 'one' && (
           <View>
@@ -347,7 +362,8 @@ const styles = StyleSheet.create({
     },
     listCoinIconImg: {
         width: "100%",
-        height: "100%"
+        height: "100%",
+        borderRadius:100
     },
     oneTextWrapper: {},
     oneTextSymbol: {

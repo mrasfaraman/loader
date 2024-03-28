@@ -70,7 +70,6 @@
   "wallet_address": "Dirección de la Cartera",
   "share": "Compartir",
   "create_strong_password": "Crear Contraseña Fuerte",
-  "Chain_ID":"Ketten-ID",
   "create_password": "Crear Contraseña",
   "set_password": "Establecer Contraseña",
   "transaction_record": "Registro de Transacciones",
@@ -128,11 +127,5 @@
   "share_app": "app_teilen",
   "staking": "apostar",
   "help_and_support": "hilfe_und_unterstützung",
-  "what_issue_are_you_facing": "Qué_problema_estás_enfrentando",
-  "About_BTX_Wallet": "BTX Wallet hakkında",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "BTX Wallet, BTX (Bitcore) kripto paranızı yönetmek için tasarlanmış güvenli bir dijital cüzdandır.",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "BTX Wallet ile BTX jetonlarınızı güvenli ve uygun şekilde gönderebilir, alabilir ve depolayabilirsiniz.",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "Amacımız, kullanıcıların BTX varlıklarını yönetmek için sorunsuz ve kullanıcı dostu bir deneyim sunmaktır.",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "BTX Wallet, fonlarınızın güvenliğini gelişmiş şifreleme ve kimlik doğrulama mekanizmalarıyla sağlar.",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "BTX Wallet'ın gücünü deneyimleyin ve bugün Bitcore varlıklarınızın tam kontrolünü alın."
+  "what_issue_are_you_facing": "Qué_problema_estás_enfrentando"
 }

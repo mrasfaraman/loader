@@ -325,8 +325,8 @@ export default function ImportWalletMnemonic({ navigation }) {
         <ScrollView style={{ backgroundColor: theme.screenBackgroud }}>
             <Header onBack={() => navigation.goBack()} title="Import Account" />
 
-            <View style={[styles.content, styles.textContainer, { marginTop: '8%' , marginBottom:'10%' }]}>
-                <Text style={[styles.textStyle, { color: theme.text }]}>Import Account Using Mnemonic</Text>
+            <View style={[styles.content, styles.textContainer, { marginTop: '20%' , marginBottom:'10%' }]}>
+                <Text style={[styles.textStyle, { color: theme.text }]}>Import Accouont Using Mnemonic</Text>
                 <Text
                     style={[styles.textStyle, styles.instruction, { color: theme.text }]}>
                     Import Account Using {activeNet?.networkName} Mnemonic Words
@@ -351,16 +351,15 @@ export default function ImportWalletMnemonic({ navigation }) {
 
 
 
-            <View style={styles.container}>
+<View style={styles.container}>
   <View style={styles.column}>
     {Array.from({ length: 6 }).map((_, index) => (
       <TextInput
         key={`input-${index*2}`}
         value={mnemonicWords[index*2]}
         onChangeText={(text) => handleMnemonicChange(text, index*2)}
-        style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundColor, borderColor: theme.addButtonBorder, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 5, marginBottom: 5,width:140 }]}
+          style={[styles.input ,{ color: theme.text , backgroundColor:'gray' , borderColor:'red' , border : 1}]}
         placeholder={`${index*2 + 1}`}
-        placeholderTextColor={theme.addButtonBorder}
       />
     ))}
   </View>
@@ -370,14 +369,12 @@ export default function ImportWalletMnemonic({ navigation }) {
         key={`input-${index*2+1}`}
         value={mnemonicWords[index*2+1]}
         onChangeText={(text) => handleMnemonicChange(text, index*2+1)}
-        style={[styles.input, { color: theme.text, backgroundColor: theme.backgroundColor, borderColor: theme.addButtonBorder, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 5, marginBottom: 5,width:140,marginLeft:2 }]}
+          style={[styles.input ,{ color: theme.text , backgroundColor:'gray' , borderColor:'red' , border : 1}]}
         placeholder={`${index*2 + 2}`}
-        placeholderTextColor={theme.addButtonBorder}
       />
     ))}
   </View>
 </View>
-
 
 
 
@@ -408,15 +405,14 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom:30,
-        paddingHorizontal:10
+        marginBottom:30
       },
       column: {
         // Adjust the width as necessary to fit your design
         width: '50%',
       },
       input: {
-        marginVertical: 2,
+        marginVertical: 8,
         // Further style your TextInput components as necessary
       },
     content: {
@@ -454,7 +450,8 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         justifyContent: 'space-between',
         borderRadius: 8,
-        marginHorizontal: 26,
+        marginHorizontal: 16,
+        marginBottom: 16,
     },
     inputLock: {
         flexDirection: 'row',

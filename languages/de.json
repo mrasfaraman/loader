@@ -126,13 +126,6 @@
   "about_app": "sobre_la_aplicación",
   "share_app": "compartir_aplicación",
   "staking": "apostar",
-  "Chain_ID":"ID de cadena",
   "help_and_support": "ayuda_y_soporte",
-  "what_issue_are_you_facing": "Mit_welchem_Problem_haben_Sie_zu_kämpfen",
-  "About_BTX_Wallet": "Acerca de BTX Wallet",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "BTX Wallet es una billetera digital segura diseñada para administrar su criptomoneda BTX (Bitcore).",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "Con BTX Wallet, puede enviar, recibir y almacenar tokens BTX de manera segura y conveniente.",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "Nuestro objetivo es proporcionar a los usuarios una experiencia fluida y fácil de usar para administrar sus tenencias de BTX.",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "BTX Wallet garantiza la seguridad de sus fondos a través de mecanismos avanzados de encriptación y autenticación.",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "Experimente el poder de BTX Wallet y tome el control total de sus tenencias de Bitcore hoy."
+  "what_issue_are_you_facing": "Mit_welchem_Problem_haben_Sie_zu_kämpfen"
 }

@@ -59,9 +59,9 @@ const CURRENCIES = [
   },
 ];
 export default function CurrencyScreen({navigation}) {
-  const [currency, setCurrency] = useState('USD $');
-  const [currencycode, setCurrencycode] = useState('usd');
-  const [currencyS, setCurrencyS] = useState('$');
+  const [currency, setCurrency] = useState('');
+  const [currencycode, setCurrencycode] = useState('');
+  const [currencyS, setCurrencyS] = useState('');
 
   const {theme} = useContext(ThemeContext);
   const {t} = useTranslation();

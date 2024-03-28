@@ -75,10 +75,8 @@ function Customize({getOpenCustomizer, customizerOpen, navigation}) {
         isOpen={customizerOpen}
         onClose={() => getOpenCustomizer(false)}>
         <Actionsheet.Content style={{backgroundColor: theme.customizeBG}}>
-          <Box w="100%" h={500} px={4} justifyContent="center">
+          <Box w="100%" h={600} px={4} justifyContent="center">
             <CreditCard isOpen={customizerOpen} navigation={navigation} />
-            <View style={{height:15}}></View>
-            <ScrollView>
             <View style={styles.colorWrapper}>
               <Text style={[styles.colorText, {color: theme.text}]}>
               {t('select_color')}:
@@ -368,7 +366,6 @@ function Customize({getOpenCustomizer, customizerOpen, navigation}) {
                 </TouchableOpacity>
               </View>
             </View>
-            </ScrollView>
           </Box>
         </Actionsheet.Content>
       </Actionsheet>

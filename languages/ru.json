@@ -127,13 +127,6 @@
   "about_app": "о_приложении",
   "share_app": "поделиться_приложением",
   "staking": "стейкинг",
-  "Chain_ID":"Идентификатор цепи",
   "help_and_support": "помощь_и_поддержка",
-  "what_issue_are_you_facing": "С_какой_проблемой_вы_сталкиваетесь",
-  "About_BTX_Wallet": "Биткоин кошелька БТХ",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "Биткоин кошелек - это безопасный цифровой кошелек, предназначенный для управления вашей криптовалютой БТХ (Биткор).",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "С Биткоин кошельком вы можете отправлять, получать и хранить токены БТХ безопасно и удобно.",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "Наша цель - обеспечить пользователям безпроблемный и удобный опыт управления их БТХ-державами.",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "Биткоин кошелек обеспечивает безопасность ваших средств с помощью продвинутых механизмов шифрования и аутентификации.",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "Ощутите мощь Биткоин кошелька и получите полный контроль над своими державами Биткор уже сегодня."
+  "what_issue_are_you_facing": "С_какой_проблемой_вы_сталкиваетесь"
 }

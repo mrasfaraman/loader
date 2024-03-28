@@ -126,13 +126,6 @@
   "about_app": "ऐप के बारे में",
   "share_app": "ऐप शेयर करें",
   "staking": "दांव",
-  "Chain_ID":"चेन आईडी",
   "help_and_support": "सहायता_और_समर्थन",
-  "what_issue_are_you_facing": "आप_किस_समस्या_का_सामना_कर_रहे_हैं",
-  "About_BTX_Wallet":"बीटीएक्स_वॉलेट_के_बारे_में",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "बीटीएक्स_वॉलेट_आपके_बीटीएक्स_(बिटकोर)_क्रिप्टोकरेंसी_का_सुरक्षित_डिजिटल_वॉलेट_है।",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "बीटीएक्स_वॉलेट_के_साथ,_आप_सुरक्षित_तरीके_से_बीटीएक्स_टोकन_भेज,_प्राप्त_कर,_और_संग्रहित_कर_सकते_हैं।",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "हमारा_लक्ष्य_उपयोगकर्ताओं_को_उनके_बीटीएक्स_होल्डिंग्स_को_प्रबंधित_करने_के_लिए_एक_समारोहात्मक_और_उपयोगकर्ता-मित्र_अनुभव_प्रदान_करना_है",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "बीटीएक्स_वॉलेट_आपके_फंड्स_की_सुरक्षा_को_उन्नत_एन्क्रिप्शन_और_प्रमाणीकरण_मेकेनिज़मों_के_माध्यम_से_सुनिश्चित_करता_है",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "बीटीएक्स_वॉलेट_की_शक्ति_का_अनुभव_करें_और_आज_ही_अपने_बिटकोर_होल्डिंग्स_पर_पूर्ण_नियंत्रण_लें।"
+  "what_issue_are_you_facing": "आप_किस_समस्या_का_सामना_कर_रहे_हैं"
 }

@@ -380,68 +380,28 @@ const BrowserScreen = ({navigation}) => {
           />
         <View style={[styles.toolbar,{backgroundColor: theme.menuItemBG}]}>
         <TouchableOpacity style={[styles.navigationButton, { alignItems: 'center' }]} onPress={prevFunction} disabled={!prev}>
-        <Image
-                    source={
-                      theme.type == 'dark'
-                        ? require('../assets/backw.png')
-                        : require('../assets/backb.png')
-                    }
-                    style={{ width: 20, height: 20 }}
-
-                  />
-<Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('back')}</Text>
+  <Icon name="arrow-left" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
+  <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('back')}</Text>
 </TouchableOpacity>
 <TouchableOpacity style={[styles.navigationButton, { alignItems: 'center' }]} onPress={nextFunction} disabled={!next}>
-<Image
-                    source={
-                      theme.type == 'dark'
-                        ? require('../assets/forwardw.png')
-                        : require('../assets/forwardb.png')
-                    }
-                    style={{ width: 20, height: 20 }}
-
-                  />
-<Text style={[styles.iconText, { marginRight: -10, color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('forward')}</Text>
+  <Icon name="arrow-right" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
+  <Text style={[styles.iconText, { marginRight: -10, color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('forward')}</Text>
 </TouchableOpacity>
 <TouchableOpacity style={[styles.clearButton, { alignItems: 'center' }]} onPress={histCleatFunction}>
-<Image
-                    source={
-                      theme.type == 'dark'
-                        ? require('../assets/deleteb.png')
-                        : require('../assets/deletew.png')
-                    }
-                    style={{ width: 20, height: 20 }}
-
-                  /> 
-                   <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('clear')}</Text>
+  <Icon name="trash" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
+  <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('clear')}</Text>
 </TouchableOpacity>
 <TouchableOpacity style={[styles.historyButton, { alignItems: 'center' }]} onPress={loadHistFunction}>
   <Icon name="history" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
   <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('history')}</Text>
 </TouchableOpacity>
 <TouchableOpacity style={[styles.reloadButton, { alignItems: 'center' }]} onPress={reloadFunction}>
-<Image
-                    source={
-                      theme.type == 'dark'
-                        ? require('../assets/reloadw.png')
-                        : require('../assets/reloadb.png')
-                    }
-                    style={{ width: 20, height: 20 }}
-
-                  /> 
-                    <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('reload')}</Text>
+  <Icon name="refresh" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
+  <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('reload')}</Text>
 </TouchableOpacity>
 <TouchableOpacity style={[styles.fontButton, { alignItems: 'center' }]} onPress={() => navigation.navigate('MainPage')}>
-<Image
-                    source={
-                      theme.type == 'dark'
-                        ? require('../assets/homew.png')
-                        : require('../assets/homeb.png')
-                    }
-                    style={{ width: 20, height: 20 }}
-
-                  />   
-                  <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('home')}</Text>
+  <Icon name="stop" size={18} color={theme.type === 'dark' ? 'white' : 'black'} />
+  <Text style={[styles.iconText, { color: theme.type === 'dark' ? 'white' : 'black' }]}>{t('home')}</Text>
 </TouchableOpacity>
 
 

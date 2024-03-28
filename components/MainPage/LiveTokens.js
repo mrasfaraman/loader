@@ -30,7 +30,7 @@ const LiveToken = ({ navigation, address }) => {
   const [switchEnables, setSwitchEnables] = useState([]);
   const [currencycode, setCurrencycode] = useState('usd');
 
-  const [symbol, setSymbol] = useState('$')
+  const [symbol, setSymbol] = useState('')
   const getSwitchData = async () => {
     const existingDataJson = await AsyncStorage.getItem('switchs');
     let existingData = existingDataJson ? JSON.parse(existingDataJson) : [];
@@ -111,8 +111,6 @@ const LiveToken = ({ navigation, address }) => {
     
       getCoinsData();
     }, [currencycode, reloadFlag]);
-
-
     useEffect(() => {
       // loadSelectedCode();
   
@@ -124,13 +122,14 @@ const LiveToken = ({ navigation, address }) => {
         return () => clearTimeout(timer);
       };
   
-      setInitialLoader(); 
+      setInitialLoader(); // Call initial loader when component mounts
   
       const unsubscribe = navigation.addListener('focus', () => {
         console.log('Currency Code:', currencycode); // Log currency code when screen gains focus
       });
       return unsubscribe;
     }, [navigation]);
+
 
   const [isGrid, setIsGrid] = useState(false);
   const { theme } = useContext(ThemeContext);
@@ -171,63 +170,59 @@ const LiveToken = ({ navigation, address }) => {
        return;
      }
     return (
-      <View
-      style={[
-        styles.renderCardWrapper,
-        { backgroundColor: theme.menuItemBG },
-        theme.type != 'dark'
-          ? { borderWidth: 1, borderColor: theme.buttonBorder }
-          : {},
-      ]}
-    >
-      <View style={styles.coinDetailWrapper}>
-        <View>
-          <Image style={styles.pancakeLeftImage} source={{ uri: item?.image }} />
-        </View>
-        <View>
-          <Text style={[styles.assetCoinSymbol, { color: theme.text }]}>
-            {item?.name?.substring(0, 12)}
-          </Text>
-    
-          <Text style={[styles.assetCoinName, { color: theme.amountGreen }]}>
+    <View
+    style={[
+      styles.renderCardWrapper,
+      { backgroundColor: theme.menuItemBG },
+      theme.type != 'dark'
+        ? { borderWidth: 1, borderColor: theme.buttonBorder }
+        : {},
+    ]}>
+    <View style={styles.coinDetailWrapper}>
+      <View>
+        <Image style={styles.pancakeLeftImage} source={{ uri: item?.image }} />
+      </View>
+      <View>
+        <Text style={[styles.assetCoinSymbol, { color: theme.text }]}>
+        {item?.name?.substring(0,12)}
+        </Text>
+        
+      <Text style={[styles.assetCoinName, {color: theme.amountGreen}]}>
             24h: {item?.price_change_percentage_24h}%
-          </Text>
-        </View>
+        </Text>
       </View>
-      <View style={styles.graphWrapper}>
-        <LineChart
-          style={{ height: 50, width: 150 }}
-          data={item?.sparkline_in_7d?.price}
-          svg={{ stroke: 'green', strokeWidth: 2 }}
-          contentInset={{ top: 0, bottom: 0 }}
-        />
+    </View>
+    <View style={styles.graphWrapper}>
+      {/* <Image source={AssetGraph} /> */}
+      <LineChart
+        style={{ height: 50, width: 150 }}
+        data={item?.sparkline_in_7d?.price}
+        svg={{ stroke: 'green', strokeWidth: 2 }}
+        contentInset={{ top:0, bottom: 0 }}
+      />
+      {/* <Text style={[styles.assetCoinName, { color: theme.text }]}>
+          {item?.symbol.toUpperCase()}
+        </Text> */}
+    </View>
+    <View style={styles.assetCardLastWrapper}>
+      <View>
+      <Text style={[styles.assetLastPrice, {color: theme.text}]}>
+              {item?.symbol?.toUpperCase()} {symbol}{item?.current_price}
+            </Text>
+        <Text style={[styles.assetLastStoke, { color: theme.text }]}>
+        {item?.last_updated}
+        </Text>
       </View>
-      <View style={styles.assetCardLastWrapper}>
-        <View>
-          <Text style={[styles.assetLastPrice, { color: theme.text }]}>
-            {item?.symbol?.toUpperCase()} {symbol}
-            {item?.current_price}
-          </Text>
-          <Text style={[styles.assetLastStoke, { color: theme.text }]}>
-            {item?.last_updated &&
-              new Date(item.last_updated).toLocaleString([], {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-              })}
-          </Text>
-        </View>
-        <View>
-          <View style={styles.assetLastRightImgWrapperFlex}>
-            <Image source={{ uri: item?.image }} />
-          </View>
+      <View>
+        <View style={styles.assetLastRightImgWrapperFlex}>
+          <Image  source={{ uri: item?.image }} />
+          {/* <Text style={[styles.assetLastSymbol, { color: theme.text }]}>
+            {item?.last_updated}
+          </Text> */}
         </View>
       </View>
     </View>
-    
+  </View>
     );
   };
   // Box Row
@@ -238,7 +233,6 @@ const LiveToken = ({ navigation, address }) => {
    }else if(!enabled){
       return;
     }
-
     return (
       <View
   style={[
@@ -256,8 +250,8 @@ const LiveToken = ({ navigation, address }) => {
     <View style={{width:80}}>
       <Text
         style={[styles.assetCoinSymbol, { color: theme.text }]}
-        numberOfLines={2} 
-        ellipsizeMode="tail" 
+        numberOfLines={2} // Adjust the number of lines as needed
+        ellipsizeMode="tail" // Truncate the text with an ellipsis if it overflows
       >
         {item?.name}
       </Text>

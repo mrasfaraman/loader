@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {ThemeContext} from '../../context/ThemeContext';
 import {useAuth} from '../../context/AuthContext';
-import {importEVMToken , importSolToken} from '../../utils/function';
+import {importEVMToken , importSolToken , importTronToken} from '../../utils/function';
 import MaroonSpinner from '../Loader/MaroonSpinner';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import SubmitBtn from '../SubmitBtn';
@@ -66,7 +66,7 @@ const Token = ({navigation}) => {
 
 
     let net = selectedNetworkParse;
-    const walletAddress = selectedNetworkParse.type == 'solana' ? selectedAccount.solana.publicKey : selectedAccount.evm.address;
+    const walletAddress = selectedNetworkParse.type == 'solana' ? selectedAccount.solana.publicKey : selectedNetworkParse.type == 'tron' ? selectedAccount.tron.address : selectedAccount.evm.address;
     if (selectedNetworkParse.type == 'solana' ) {
       try{
         setLoader(true)
@@ -93,6 +93,30 @@ const Token = ({navigation}) => {
       }
       
       
+    }else if  (selectedNetworkParse.type == 'tron' ){
+      try{
+        setLoader(true)
+        
+        let responce = await importTronToken(walletAddress , tokenDetail.tokenAddress );
+        if(!responce){
+          setLoader(false)
+          Toast.show({
+            type: ALERT_TYPE.DANGER,
+            title: 'Network Error',
+            textBody: 'Network is Not ok',
+          })
+        }else{
+          setLoader(false)
+          console.log(responce)
+          updateTokenValue('tokenAddress', tokenDetail.tokenAddress)
+          updateTokenValue('symbol',responce.symbol)
+          updateTokenValue('decimal',responce.decimals)
+          setImportedToken(responce)
+          setToggle(true)
+        }
+      }catch(error){
+        setLoader(false)
+      }
     } else {
       if(erc20_Regex_evm.test(tokenDetail.tokenAddress)){
         try{
@@ -150,7 +174,6 @@ const Token = ({navigation}) => {
                 styles.inpWrapper,
                 {
                   backgroundColor: theme.menuItemBG,
-                  color: theme.text,
                   paddingVertical: 20,
                   borderColor: theme.addButtonBorder,
                   borderWidth: 1,
@@ -166,7 +189,6 @@ const Token = ({navigation}) => {
                 styles.inpWrapper,
                 {
                   backgroundColor: theme.menuItemBG,
-                  color: theme.text,
                   paddingVertical: 25,
                   borderColor: theme.addButtonBorder,
                   borderWidth: 1,
@@ -182,7 +204,6 @@ const Token = ({navigation}) => {
                 styles.inpWrapper,
                 {
                   backgroundColor: theme.menuItemBG,
-                  color: theme.text,
                   paddingVertical: 25,
                   borderColor: theme.addButtonBorder,
                   borderWidth: 1,

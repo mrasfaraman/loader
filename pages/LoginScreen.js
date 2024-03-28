@@ -1,5 +1,5 @@
 import CheckBox from '@react-native-community/checkbox';
-import React, { useState, useContext, useEffect } from 'react';
+import React, {useState, useContext , useEffect} from 'react';
 import {
   Image,
   ScrollView,
@@ -15,25 +15,25 @@ import lock from '../assets/images/lock.png';
 import lockDark from '../assets/images/lock-dark.png';
 import SubmitBtn from '../components/SubmitBtn';
 import Header from '../components/header';
-import { ThemeContext } from '../context/ThemeContext';
-import { useAuth } from '../context/AuthContext';
+import {ThemeContext} from '../context/ThemeContext';
+import {useAuth} from '../context/AuthContext';
 import { authenticateFingerprint } from '../utils/BiometricUtils';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import i18n from './i18n';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function LoginScreen({ navigation }) {
+
+export default function LoginScreen({navigation}) {
   const [showPassword, setShowPassword] = useState(true);
   const [passwordInput, setPasswordInput] = useState('');
   const [error, setError] = useState('');
-  const { t } = useTranslation();
-
+  const {t} = useTranslation();
   useEffect(() => {
     const loadSelectedLanguage = async () => {
       try {
         const selectedLanguage = await AsyncStorage.getItem('selectedLanguage');
         if (selectedLanguage) {
-          i18n.changeLanguage(selectedLanguage);
+          i18n.changeLanguage(selectedLanguage); 
         }
       } catch (error) {
         console.error('Error loading selected language:', error);
@@ -42,8 +42,8 @@ export default function LoginScreen({ navigation }) {
     loadSelectedLanguage();
   }, []);
 
-  const { theme } = useContext(ThemeContext);
-  const { password, savePassword } = useAuth();
+  const {theme} = useContext(ThemeContext);
+  const {password, savePassword} = useAuth();
 
   function handleSubmit() {
     if (password !== passwordInput) {
@@ -58,44 +58,43 @@ export default function LoginScreen({ navigation }) {
     if (fingerprint) {
       navigation.navigate('MainPage')
     }
+
   }
 
-  useEffect(() => {
-    if (password == null || password == undefined || password == '') {
-      return navigation.navigate('Home');
+
+ 
+  useEffect(()=>{
+   
+    // if(fingerprint){
+    //   navigation.navigate('MainPage');
+    // }
+    if(password == null || password == undefined || password == ''){
+      return navigation.navigate('Home');      
     }
     handleSubmitfingerprint()
-  }, [password])
+  },[password])
 
   return (
-    <ScrollView style={{ backgroundColor: theme.screenBackgroud, flex: 1 }}>
-      <View style={{ alignItems: 'center', marginTop: '10%', marginTop:'50%' }}>
-        <Image
-          source={
-            theme.type == 'dark'
-              ? require('../assets/btxw.png')
-              : require('../assets/btxb.png')
-          }
-          style={{ width: '40%', height: 70, resizeMode: 'contain' }}
-        />
-      </View>
-      <View style={[styles.content, styles.textContainer]}>
-        <Text style={[styles.textStyle, { color: theme.text }]}>{t('sign_in')}</Text>
-        <Text style={[styles.textStyle, styles.instruction, { color: theme.text }]}>
+    <ScrollView style={{backgroundColor: theme.screenBackgroud}}>
+      <View style={[styles.content, styles.textContainer, {marginTop: '50%'}]}>
+        <Text style={[styles.textStyle, {color: theme.text}]}>{t('sign_in')}</Text>
+        <Text
+          style={[styles.textStyle, styles.instruction, {color: theme.text}]}>
           {t('sign_in_to_continue')}
         </Text>
       </View>
-      <View style={[
-        styles.input,
-        {
-          borderColor: theme.addButtonBorder,
-          borderWidth: 1,
-        },
-      ]}>
+      <View  style={[
+          styles.input,
+          {
+            // backgroundColor: theme.textInputBG,
+            borderColor: theme.addButtonBorder,
+            borderWidth: 1,
+          },
+        ]}>
         <View style={styles.inputLock}>
           <Image source={theme.type == 'dark' ? lock : lockDark} />
           <TextInput
-            style={{ color: theme.text }}
+            style={{color: theme.text}}
             placeholder={t('password')}
             placeholderTextColor={theme.text}
             onChangeText={newText => setPasswordInput(newText)}
@@ -109,33 +108,45 @@ export default function LoginScreen({ navigation }) {
       </View>
       <View>
         {error && (
-          <Text style={[{ color: theme.emphasis, textAlign: 'center' }]}>
+          <Text style={[{color: theme.emphasis, textAlign: 'center'}]}>
             ! {error}
           </Text>
         )}
       </View>
       <SubmitBtn
-        title={t('login')}
+        title= {t('login')}
+        // onPress={() => navigation.navigate('ResetPasswordScreen')}
         onPress={() => handleSubmit()}
       />
+          {/* <SubmitBtn
+        title="Biomatric"
+        // onPress={() => navigation.navigate('ResetPasswordScreen')}
+        onPress={() => handleSubmitfingerprint()}
+      /> */}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  // screen: {
+  //   backgroundColor: '#280D2C',
+  // },
+
   content: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 10,
+    marginBottom: 70,
+    gap: 32,
   },
   textContainer: {
     gap: 0,
-    marginBottom: 10,
+    marginBottom: 30,
     textAlign: 'center',
   },
   textStyle: {
     marginLeft: 'auto',
     marginRight: 'auto',
+    // color: '#FFF',
     fontFamily: 'SF Pro Text',
     fontSize: 24,
     fontStyle: 'normal',
@@ -143,12 +154,14 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   instruction: {
+    // marginTop: 0,
     fontSize: 14,
     fontWeight: '400',
     marginTop: 12,
   },
   input: {
     flexDirection: 'row',
+    // backgroundColor: '#351739',
     alignItems: 'center',
     padding: 14,
     paddingVertical: 5,
@@ -161,5 +174,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    maxWidth: '80%',
+  },
+  placeHolderColor: {
+    color: 'white',
+  },
+  checkInput: {
+    // backgroundColor: '#280D2C',
+    marginHorizontal: 0,
+    justifyContent: 'flex-start',
+  },
+  checkText: {
+    // color: '#FFF',
+    fontFamily: 'SF Pro Text',
+    fontSize: 14,
+    fontStyle: 'normal',
+    fontWeight: '400',
+    marginLeft: 10,
+  },
+  emphasis: {
+    // color: '#F43459',
+    textDecorationLine: 'underline',
+    fontWeight: '600',
   },
 });

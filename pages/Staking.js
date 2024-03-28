@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext , useEffect , useState} from 'react';
 import {
     Image,
     ScrollView,
@@ -17,14 +17,32 @@ import {ThemeContext} from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 const Staking = ({navigation}) => {
     const {theme} = useContext(ThemeContext);
-    const { Networks} = useAuth()
+    const { Networks , selectedNetwork } = useAuth()
+    const [activeNet, setActiveNet] = useState()
     const data = Networks
+
+    const getNetworkactive = async () => {
+        let data = await JSON.parse(selectedNetwork)
+        setActiveNet(data) 
+      }
+    
+      useEffect(() => {
+        getNetworkactive()
+    }, [selectedNetwork,setActiveNet])
 
     const StakingCard = (item) => {
         // console.log(item.item.item)
-        if(item.item.index !== 3 && item.item.index !== 1){
+        if(item.item.index !== 3 && item.item.index !== 0){
             return ;
+        }else{
+            if(item.item.item?.nodeURL !== activeNet?.nodeURL){
+                return ;
+            }
         }
+
+         
+        console.log(item.item.item?.nodeURL)
+        console.log(activeNet?.nodeURL)
         return (
             <TouchableOpacity onPress={()=>{navigation.navigate('NativeEvmos',{data : item.item.item})}}>
 

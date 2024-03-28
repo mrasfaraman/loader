@@ -48,10 +48,9 @@ const PrivateKeyModal = ({ privateKey, label }) => {
                     <Image
                         source={
                             theme.type == 'dark'
-                                ? require('../../assets/privatew.png')
-                                : require('../../assets/privateb.png')
+                                ? require('../../assets/images/wallet.png')
+                                : require('../../assets/images/wallet-dark.png')
                         }
-                        style={{ width: 25, height: 25 }} 
                     />
                     <Text style={[styles.menuItemText, { color: theme.text }]}>
                     {t('show')} {label} {t('private_key')}

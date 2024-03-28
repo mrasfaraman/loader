@@ -45,6 +45,7 @@ export default function Header({title, skipOption, onSkip, onBack}) {
               {skipOption ? 'Skip' : ''}
             </Text>
           </TouchableOpacity>
+          {/* <Image source={bg_lines} /> */}
         </View>
       </ImageBackground>
     </View>

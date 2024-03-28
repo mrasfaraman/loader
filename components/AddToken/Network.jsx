@@ -139,7 +139,7 @@ const updateChain = async (cid) => {
     return (
         <View style={styles.mainWrapper}>
             <View style={styles.inpMainWrapper}>
-                <Text style={[styles.inpLabel, { color: theme.text }]}>{t('node_url')} </Text>
+                <Text style={[styles.inpLabel, { color: theme.text }]}>{t('Node_URL')} </Text>
                 <TextInput
             style={[
               styles.inpWrapper,
@@ -217,7 +217,7 @@ const updateChain = async (cid) => {
             </View>
        
             <View style={styles.inpMainWrapper}>
-                <Text style={[styles.inpLabel, { color: theme.text }]}>{t('explorer_url')} </Text>
+                <Text style={[styles.inpLabel, { color: theme.text }]}>{t('Explore_URL')} </Text>
                 <TextInput
             style={[
               styles.inpWrapper,
@@ -234,7 +234,7 @@ const updateChain = async (cid) => {
             {loadre ? <MaroonSpinner /> :
             <View style={styles.tokenImportBtnWrapper}>
             <SubmitBtn
-          title={t('add_network')} 
+          title={t('Add_Network')} 
           onPress={() => addNetworkDetail()}
           containerStyle={{marginHorizontal: 0}}
         />

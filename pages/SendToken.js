@@ -176,6 +176,37 @@ const BuyNonNative = ({ route, navigation }) => {
                             textBody: 'Address is Not Valid',
                           })
                     }
+                }else if(activeNet?.type === 'tron'){
+                    try {
+                        // setLoader(true)
+                        
+                        let trxData = {
+                            privateKey : selectedAccount?.tron?.privateKey,
+                            recipientAddress: recipientAddress,
+                            from : selectedAccount?.tron?.address,
+                            amount : amountToSend,
+                            amountWei : amountToSend * Math.pow(10, tokenData?.decimals),
+                            chain : activeNet?.nodeURL,
+                            balance: tokenData?.balance,
+                            balanceAmount: tokenData?.balance - amountToSend,
+                            symbol : activeNet?.networkName,
+                            tokenAddress : tokenData?.token_address,
+                            tokenSymbol : tokenData?.symbol
+                        }
+                        
+                        navigation.navigate('ConfirmErc20TronTransaction', {
+                            trxData: trxData,
+                          });
+                        // let response = await sendEvmToken(selectedAccount?.evm?.privateKey, recipientAddress, amountToSend * Math.pow(10, tokenData?.decimals), tokenData?.token_address, activeNet?.nodeURL);
+                        // // console.log(' evm...Send ', response);
+                        // if (response?.transactionHash) {
+                        //     setLoader(false)
+        
+                        //     navigation.navigate("ConfirmErc20Transaction")
+                        // }
+                    } catch (error) {
+                        setLoader(false)
+                    }
                 } else {
                   
                     if (evmAddressRegex.test(recipientAddress)) {
@@ -235,7 +266,7 @@ const BuyNonNative = ({ route, navigation }) => {
         setLoader(true)
         try{
             // let gasData = await Evm_estimatedGas('0x000000000000000000000000000000000000dEaD' , '0x000000000000000000000000000000000000dEaD' , 0 ,activeNet?.nodeURL)
-            let  maxBalance = Number(tokenData?.balance).toFixed(2)
+            let  maxBalance = (Number(tokenData?.balance) * (10 ** tokenData?.decimals))* (10 ** tokenData?.decimals)
             setAmountToSend(maxBalance.toString())
             setLoader(false)
         }catch(error){
@@ -279,14 +310,14 @@ const BuyNonNative = ({ route, navigation }) => {
         <ScrollView style={[styles.MainWrapper, { backgroundColor: theme.screenBackgroud }]}>
             <Header title={t('send')} onBack={() => navigation.goBack()} />
             <View>
-                <Text style={[styles.buyAmount, { color: theme.text }]}>{Number(tokenData?.balance).toFixed(3)} {tokenData?.symbol} </Text>
+                <Text style={[styles.buyAmount, { color: theme.text }]}>{((Number(tokenData?.balance) * (10 ** tokenData?.decimals))* (10 ** tokenData?.decimals)).toFixed(3)} {tokenData?.symbol} </Text>
             </View>
             <View style={[styles.currencyDetailFlex, { backgroundColor: theme.menuItemBG }]}>
                 <View style={styles.coinFlex}>
                     <Image width={50} height={50} source={{ uri: tokenData?.logo }} />
                     <View>
                         <Text style={[styles.coinMainText, { color: theme.text }]}>{tokenData?.name}</Text>
-                        <Text style={[styles.coinSecText, { color: theme.text, textTransform: "uppercase" }]}>{tokenData?.balance} {tokenData?.symbol}</Text>
+                        <Text style={[styles.coinSecText, { color: theme.text, textTransform: "uppercase" }]}>{(Number(tokenData?.balance) * (10 ** tokenData?.decimals))* (10 ** tokenData?.decimals)} {tokenData?.symbol}</Text>
                     </View>
                 </View>
             </View>

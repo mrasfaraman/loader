@@ -57,7 +57,7 @@
   "privacy_policy": "Privacy Policy",
   "import_account_using": "Import Account Using",
   "private_key": "Private Key",
-  "sign_in": "Sign in",
+  "sign_in": "Sign In",
   "sign_in_to_continue": "Sign in to continue",
   "claim_your_rewards": "Claim Your Rewards!",
   "notification": "Notification",
@@ -128,13 +128,6 @@
   "about_app": "About App",
   "share_app": "Share App",
   "staking": "Staking",
-  "Chain_ID":"Chain ID",
   "help_and_support": "Help & Support",
-  "what_issue_are_you_facing": "What Issues are you facing",
-  "About_BTX_Wallet": "About BTX Wallet",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "BTX Wallet is a secure digital wallet designed for managing your BTX (Bitcore) cryptocurrency.",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "With BTX Wallet, you can send, receive, and store BTX tokens safely and conveniently.",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "Our goal is to provide users with a seamless and user-friendly experience for managing their BTX holdings.",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "BTX Wallet ensures the security of your funds through advanced encryption and authentication mechanisms.",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "Experience the power of BTX Wallet and take full control of your Bitcore holdings today."
+  "what_issue_are_you_facing": "What Issues are you facing"
 }

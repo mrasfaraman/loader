@@ -37,35 +37,7 @@ export default function SettingsScreen({ navigation }) {
   const [currency, setCurrency] = useState('USD $');
   const [name, setName] = useState('English');
   const [flag, setFlag] = useState(require('../assets/images/Eng.png'));
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null); 
 
-  useEffect(() => {
-    const loadSettings = async () => {
-      try {
-        // Simulate loading settings or any other async operations
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Once settings are loaded, set isLoading to false
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error loading settings:', error);
-        setError(error); // Set error state if an error occurs
-      }
-    };
-
-    loadSettings();
-  }, []);
-
-  // Render error message if an error occurs
-  if (error) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>An error occurred: {error.message}</Text>
-      </View>
-    );
-  }
-  
   useEffect(() => {
     const loadSelectedLanguage = async () => {
       try {
@@ -496,23 +468,18 @@ const validatesol = async (data) => {
           onBack={() => navigation.goBack()}
         />
         <View style={[styles.container]}>
-        {isLoading ? ( // Show loader if isLoading is true
-        <MaroonSpinner />
-      ) : (
-        <>
           <View style={styles.Menu}>
             <Text style={[styles.header, { color: theme.text }]}>{t('themes')}</Text>
             <View
               style={[styles.menuItemBig, { backgroundColor: theme.menuItemBG }]}>
               <View style={styles.leftItem}>
-              <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/modew.png')
-        : require('../assets/modeb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                <Image
+                  source={
+                    theme.type == 'dark'
+                      ? require('../assets/images/palette.png')
+                      : require('../assets/images/palette-dark.png')
+                  }
+                />
                 <Text style={[styles.menuItemText, { color: theme.text }]}>
                 {t('mode')}
                 </Text>
@@ -554,14 +521,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/themew.png')
-        : require('../assets/themeb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/palette.png')
+                        : require('../assets/images/palette-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('themes')}
                   </Text>
@@ -631,7 +597,7 @@ const validatesol = async (data) => {
                 <Image
     source={
       theme.type == 'dark'
-        ? require('../assets/createw.png')
+        ? require('../assets/create.png')
         : require('../assets/createb.png')
     }
     style={{ width: 25, height: 25 }} 
@@ -704,7 +670,7 @@ const validatesol = async (data) => {
     source={
       theme.type == 'dark'
         ? require('../assets/manageaccount.png')
-        : require('../assets/manageb.png')
+        : require('../assets/manageaccountb.png')
     }
     style={{ width: 25, height: 25 }} // Adjust the width and height as needed
   />
@@ -737,14 +703,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/importw.png')
-        : require('../assets/importb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/wallet.png')
+                        : require('../assets/images/wallet-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('import_token_network')}
                   </Text>
@@ -776,13 +741,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
+  <Image
     source={
       theme.type == 'dark'
-        ? require('../assets/importw.png')
-        : require('../assets/importb.png')
+        ? require('../assets/importtoken.png')
+        : require('../assets/importtokenb.png')
     }
-    style={{ width: 25, height: 25 }} 
+    style={{ width: 25, height: 32 }} // Adjust the width and height as needed
   />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('import_token_network')}
@@ -819,7 +784,7 @@ const validatesol = async (data) => {
         ? require('../assets/networkw.png')
         : require('../assets/networkb.png')
     }
-    style={{ width: 25, height: 25 }} 
+    style={{ width: 25, height: 25 }} // Adjust the width and height as needed
   />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('networks')}
@@ -855,14 +820,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/passwordw.png')
-        : require('../assets/passwordb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/lock.png')
+                        : require('../assets/images/lock-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('reset_password')}
                   </Text>
@@ -892,14 +856,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/biometricw.png')
-        : require('../assets/biometricb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/lock.png')
+                        : require('../assets/images/lock-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('set_biometric_verification')}
                   </Text>
@@ -968,14 +931,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/currencyw.png')
-        : require('../assets/currencyb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/currency-dollar-circle.png')
+                        : require('../assets/images/currency-dollar-circle-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('currency')}
                   </Text>
@@ -1016,14 +978,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/languagew.png')
-        : require('../assets/languageb.png')
-    }
-    style={{ width: 25, height: 29 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/translate.png')
+                        : require('../assets/images/translate-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, { color: theme.text }]}>
                   {t('language')}
                   </Text>
@@ -1102,14 +1063,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/ratew.png')
-        : require('../assets/rateb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/thumbs-up.png')
+                        : require('../assets/images/thumbs-up-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, {color: theme.text}]}>
                   {t('rate_our_app')}
                   </Text>
@@ -1138,14 +1098,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/customerw.png')
-        : require('../assets/customerb.png')
-    }
-    style={{ width: 25, height: 25 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/headphone.png')
+                        : require('../assets/images/headphone-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, {color: theme.text}]}>
                   {t('customer_support')}
                   </Text>
@@ -1174,14 +1133,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/aboutw.png')
-        : require('../assets/aboutb.png')
-    }
-    style={{ width: 29, height: 29 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/info-circle.png')
+                        : require('../assets/images/info-circle-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, {color: theme.text}]}>
                   {t('about_app')}
                   </Text>
@@ -1221,14 +1179,13 @@ const validatesol = async (data) => {
                   styles.menuItem,
                 ]}>
                 <View style={styles.leftItem}>
-                <Image
-    source={
-      theme.type == 'dark'
-        ? require('../assets/sharew.png')
-        : require('../assets/shareb.png')
-    }
-    style={{ width: 22, height: 22 }} 
-  />
+                  <Image
+                    source={
+                      theme.type == 'dark'
+                        ? require('../assets/images/share.png')
+                        : require('../assets/images/share-dark.png')
+                    }
+                  />
                   <Text style={[styles.menuItemText, {color: theme.text}]}>
                   {t('share_app')}
                   </Text>
@@ -1250,7 +1207,6 @@ const validatesol = async (data) => {
               </View>
             </TouchableOpacity>
           </View>
-    </>  )}
         </View>
       </ScrollView>
     </SafeAreaView>

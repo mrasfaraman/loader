@@ -22,7 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ResetPasswordScreen({navigation}) {
   const {theme} = useContext(ThemeContext);
-  const { password: currentPassword, savePassword } = useAuth();
+  const {password, savePassword} = useAuth();
 
   const [showPreviousPassword, setShowPreviousPassword] = useState(true);
   const [showPassword, setShowPassword] = useState(true);
@@ -45,41 +45,19 @@ export default function ResetPasswordScreen({navigation}) {
     };
     loadSelectedLanguage();
   }, []);
-  
   function handleSubmit() {
-    // Check if any of the password fields are blank
-    if (
-      previousPasswordInput.trim() === '' ||
-      passwordInput.trim() === '' ||
-      confirmPasswordInput.trim() === ''
-    ) {
-      setError('All password fields are required.');
-      return;
+    if (password !== previousPasswordInput) {
+      setError('Wrong current password');
     }
 
-    // Check if the previous password matches the current password
-    if (previousPasswordInput !== currentPassword) {
-      setError('Current password is incorrect.');
-      return;
+    if (passwordInput == '' || passwordInput !== confirmPasswordInput) {
+      if (passwordInput == '') {
+        setError('Password cannot be empty!');
+      } else {
+        setError('Password does not match!');
+      }
     }
 
-    // Password complexity check
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-    if (!passwordRegex.test(passwordInput)) {
-      setError(
-        'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.'
-      );
-      return;
-    }
-
-    // Password match check
-    if (passwordInput !== confirmPasswordInput) {
-      setError('Passwords do not match!');
-      return;
-    }
-
-    // Save password and navigate
     savePassword(passwordInput);
     navigation.navigate('MainPage');
   }
@@ -183,14 +161,14 @@ export default function ResetPasswordScreen({navigation}) {
           onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
           <Image source={theme.type == 'dark' ? eye : eyeDark} />
         </TouchableOpacity>
-      </View>
-      <View>
+        <View>
           {error && (
-            <Text style={[{color: theme.emphasis, textAlign: 'center', padding:10}]}>
+            <Text style={[{color: theme.emphasis, textAlign: 'center'}]}>
               ! {error}
             </Text>
           )}
         </View>
+      </View>
 
       <SubmitBtn
         title={t('reset_password')}

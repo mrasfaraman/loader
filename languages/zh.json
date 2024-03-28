@@ -126,13 +126,6 @@
   "about_app": "关于应用",
   "share_app": "分享应用",
   "staking": "抵押",
-  "Chain_ID":"链ID",
   "help_and_support": "帮助与支持 ",
-  "what_issue_are_you_facing": "你面临什么问题",
-  "About_BTX_Wallet": "关于BTX钱包",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "BTX钱包是一个安全的数字钱包，专为管理您的BTX（Bitcore）加密货币而设计。",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "通过BTX钱包，您可以安全便捷地发送、接收和存储BTX代币。",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "我们的目标是为用户提供一个无缝和用户友好的体验，以管理他们的BTX持有。",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "BTX钱包通过先进的加密和身份验证机制确保您资金的安全。",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "体验BTX钱包的力量，并今天完全掌控您的比特核持仓。"
+  "what_issue_are_you_facing": "你面临什么问题"
 }

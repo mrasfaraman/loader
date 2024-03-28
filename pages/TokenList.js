@@ -177,14 +177,10 @@ const TokenList = ({navigation}) => {
           <View>
             <Image style={styles.pancakeLeftImage} source={{ uri: item?.image }} />
           </View>
-          <View style={{width:80}}>
-      <Text
-        style={[styles.assetCoinSymbol, { color: theme.text }]}
-        numberOfLines={2} 
-        ellipsizeMode="tail" 
-      >
-        {item?.name}
-      </Text>
+          <View>
+            <Text style={[styles.assetCoinSymbol, { color: theme.text }]}>
+              {item?.name}
+            </Text>
             <Text style={[styles.assetCoinName, {color: theme.amountGreen}]}>
             24h: {item?.price_change_percentage_24h}%
             </Text>
@@ -197,8 +193,8 @@ const TokenList = ({navigation}) => {
         <View style={styles.assetCardLastWrapper}>
           <View>
           <Switch
-          trackColor={{ false: "#a3b0c7", true: 'gray' }}
-          thumbColor={enabled ? theme.addButtonBorder : theme.addButtonBorder}
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={enabled ? "#f5dd4b" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={handleSwitchToggle}
           value={enabled}
@@ -261,6 +257,9 @@ const TokenList = ({navigation}) => {
   <AddButton navigation={navigation} />
 )}
 {activeNet?.type == 'evm' && (
+  <AddButton navigation={navigation} />
+)}
+{activeNet?.type == 'tron' && (
   <AddButton navigation={navigation} />
 )}
           </View>

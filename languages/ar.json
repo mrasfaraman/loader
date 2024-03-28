@@ -126,13 +126,6 @@
   "about_app": "عن_التطبيق",
   "share_app": "مشاركة_التطبيق",
   "staking": "رهان",
-  "Chain_ID":"معرف السلسلة",
   "help_and_support": "المساعدة_والدعم",
-  "what_issue_are_you_facing": "ما_المشكلة_التي_تواجهه",
-  "About_BTX_Wallet": "حول محفظة بيتكس",
-  "BTX_Wallet_is_a_secure_digital_wallet_designed_for_managing_your_BTX_(Bitcore)_cryptocurrency": "محفظة بيتكس هي محفظة رقمية آمنة مصممة لإدارة عملتك الرقمية بيتكس (بيتكور).",
-  "With_BTX_Wallet,_you_can_send,_receive,_and_store_BTX_tokens_safely_and_conveniently": "مع محفظة بيتكس، يمكنك إرسال واستلام وتخزين الرموز بيتكس بأمان وبسهولة.",
-  "Our_goal_is_to_provide_users_with_a_seamless_and_user-friendly_experience_for_managing_their_BTX_holdings": "هدفنا هو توفير تجربة سلسة وسهلة الاستخدام للمستخدمين لإدارة استثماراتهم في بيتكس.",
-  "BTX_Wallet_ensures_the_security_of_your_funds_through_advanced_encryption_and_authentication_mechanisms": "تضمن محفظة بيتكس أمان أموالك من خلال آليات تشفير ومصادقة متقدمة.",
-  "Experience_the_power_of_BTX_Wallet_and_take_full_control_of_your_Bitcore_holdings_today": "اكتشف قوة محفظة بيتكس واحصل على السيطرة الكاملة على استثماراتك في بيتكور اليوم."
+  "what_issue_are_you_facing": "ما_المشكلة_التي_تواجهه"
 }
